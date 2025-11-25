@@ -7,7 +7,7 @@ void main() {
   runApp(StudentIDApp());
 }
 
-// Main App Widget
+
 class StudentIDApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class StudentIDApp extends StatelessWidget {
   }
 }
 
-// Home Page Widget
+
 class StudentIDHomePage extends StatefulWidget {
   @override
   _StudentIDHomePageState createState() => _StudentIDHomePageState();
@@ -36,7 +36,7 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
   List<String> _history = [];
   final List<IDType> _majors = IDType.values;
 
-  // Function to pick birth date
+
   void _pickBirthDate() async {
     DateTime? date = await showDatePicker(
       context: context,
@@ -51,7 +51,7 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
     }
   }
 
-  // Function to generate ID
+
   void _generateID() {
     if (_selectedMajor == null) {
       ScaffoldMessenger.of(context)
@@ -59,13 +59,13 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
       return;
     }
 
-    // Generate the ID
+
     String id = _idGenerator.generateID(_selectedMajor!);
 
-    // Save to history and clear inputs
+ 
     setState(() {
       _generatedID = id;
-      _history.insert(0, id); // newest first
+      _history.insert(0, id); 
       _nameController.clear();
       _phoneController.clear();
       _birthDate = null;
@@ -73,7 +73,6 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
     });
   }
 
-  // Copy to clipboard
   void _copyID() {
     if (_generatedID.isNotEmpty) {
       Clipboard.setData(ClipboardData(text: _generatedID));
@@ -108,17 +107,16 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Full Name
+          
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
                   labelText: 'Full Name', border: OutlineInputBorder()),
               textInputAction: TextInputAction.next,
-              onSubmitted: (_) => _generateID(), // Enter key triggers generation
+              onSubmitted: (_) => _generateID(), 
             ),
             SizedBox(height: 12),
 
-            // Phone
             TextField(
               controller: _phoneController,
               decoration: InputDecoration(
@@ -129,7 +127,7 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
             ),
             SizedBox(height: 12),
 
-            // Birth Date picker
+        
             Row(
               children: [
                 Expanded(
@@ -147,7 +145,7 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
             ),
             SizedBox(height: 12),
 
-            // Major Dropdown
+           
             DropdownButtonFormField<IDType>(
               value: _selectedMajor,
               items: _majors
@@ -166,14 +164,13 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
             ),
             SizedBox(height: 20),
 
-            // Generate button
             ElevatedButton(
               onPressed: _generateID,
               child: Text('Generate Student ID'),
             ),
             SizedBox(height: 20),
 
-            // Display generated ID + copy button
+         
             if (_generatedID.isNotEmpty)
               Column(
                 children: [
@@ -214,3 +211,4 @@ class _StudentIDHomePageState extends State<StudentIDHomePage> {
     );
   }
 }
+
